@@ -1,0 +1,34 @@
+.FormInput-container {
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.FormInput-label {
+  margin-right: 5px;
+}
+
+.FormInput-label {
+  width: 350px;
+  font-size: 12px;
+  margin-bottom: 5px;
+}
+
+.FormInput-normalInput {
+  width: 350px;
+  font-size: 12px;
+  margin-bottom: 5px;
+}
+
+.FormInput-gptInput {
+  width: 750px;
+  height: 600px;
+  font-size: 12px;
+  margin-bottom: 5px;
+}
+
+input[type=checkbox].FormInput-input {
+  width: 10px;
+}
+

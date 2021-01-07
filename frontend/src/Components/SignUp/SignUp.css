@@ -1,0 +1,48 @@
+.SignUp-container {
+  width: 90%;
+  margin: 0 auto;
+  padding-top: 115px;
+}
+
+.SignUp-header {
+  justify-content: space-between;
+  display: flex;
+}
+
+.SignUp-newPasswordsContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.SignUp-newPasswordsLabel {
+  width: 350px;
+  font-size: 12px;
+  margin-bottom: 5px;
+}
+
+.SignUp-passwords {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.SignUp-password {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.SignUp-passwordBody {
+  padding: 5px;
+  margin: 2px;
+  border-radius: 5px;
+  border: 1px solid #C7C3FB;
+  color: #6558F5;
+}
+
+.SignUp-passwordDelete {
+  color: red;
+  margin-left: 5px;
+  cursor: pointer;
+}

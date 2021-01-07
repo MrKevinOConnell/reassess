@@ -1,0 +1,17 @@
+.NavBar-container {
+  display: flex;
+  height: 75px;
+  border-bottom: solid #9EADBA 1px;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 15px;
+  position: fixed;
+  width: 100%;
+  overflow: hidden;
+  background: white;
+  z-index: 13;
+}
+
+.NavBar-container a {
+  font-size: 18px;
+}

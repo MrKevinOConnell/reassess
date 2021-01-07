@@ -1,0 +1,92 @@
+.PillButton-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  margin: 5px;
+  border-radius: 5px;
+  border: 1px solid #C7C3FB;
+  color: #6558F5;
+  cursor: pointer;
+  height: 20px;
+}
+
+.PillButton-container.selected {
+  color: white;
+  background-color: #6558F5;
+  font-weight: bold;
+}
+
+/* for the navigation buttons */
+.PillButton-container.selected > a {
+  color: white;
+}
+
+.PillButton-container.disabled {
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.PillButton-container.release, .PillButton-container.back {
+  background-color: #D3455B;
+  border-color: #D3455B;
+  color: white;
+}
+
+.PillButton-container.intent {
+  background-color: white;
+  border: none;
+  color: #2A3845;
+  align-self: center;
+}
+
+.PillButton-container.cancel {
+  background-color: white;
+  border: 1px solid #EFBCC4;
+  color: #D3455B;
+}
+
+.PillButton-container.login {
+  background-color: white;
+  border: 1px solid gray;
+  color: black;
+  align-self: center;
+}
+
+.PillButton-container.intent.selected {
+  background-color: white;
+  color: #6558F5;
+}
+
+.PillButton-container.add {
+  background-color: white;
+  color: #6558F5;
+}
+
+.PillButton-container.create {
+  height: 0;
+  border: none;
+}
+
+.PillButton-selectedIcon {
+  margin-left: 10px;
+  padding-left: 10px;
+  border-left: solid 1px white;
+}
+
+.intent .PillButton-selectedIcon {
+  border-left: solid 1px #6558F5;
+}
+
+.category .PillButton-selectedIcon {
+  border-left: solid 1px white;
+}
+
+.PillButton-container a {
+  text-decoration: none;
+  color: #6558F5;
+}
+
+.PillButton-container.release a {
+  color: white;
+}

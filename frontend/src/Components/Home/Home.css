@@ -1,0 +1,60 @@
+.Home-container {
+  margin: 0 auto;
+  width: 80%;
+  padding-top: 115px;
+}
+
+.Home-loading {
+  position: absolute;
+  top: 30%;
+  width: 85%;
+}
+
+.Home-titleContainer {
+  margin-bottom: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.Home-titleText {
+  align-self: center;
+}
+
+.Home-categories, .Home-intents {
+  display: flex;
+  flex-wrap: wrap;
+  width: 70%;
+}
+
+.Home-categories {
+}
+
+.Home-navigation {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.Home-subTitleContainer {
+  margin-bottom: 20px;
+  padding-bottom: 5px;
+}
+
+.Home-phrasesContainer {
+  
+}
+
+.Home-phrase {
+  text-align: left;
+  padding: 5px;
+  margin-top: 5px;
+}
+
+.Home-newPhraseContainer {
+  display: flex;
+  justify-content: center;
+  border-top: 1px #6558F5 solid;
+  padding-top: 15px;
+  margin-top: 15px;
+  margin-bottom: 75px;
+}

@@ -1,0 +1,25 @@
+.Login-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 25%;
+}
+
+.Login-title {
+  margin-bottom: 10px;
+}
+
+.Login-controls {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.Login-control {
+  margin: 10px;
+}
+
+.Login-control-error {
+  margin-right: 5px;
+  color: red;
+}
