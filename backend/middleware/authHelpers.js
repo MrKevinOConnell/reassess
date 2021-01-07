@@ -9,7 +9,7 @@ const { JWT_SECRET } = process.env
 // 3 days in minutes
 const EXPIRE_TIME = 3 * 24 * 60 * 60
 const checkToken = expressJwt({ secret: JWT_SECRET, algorithms: [ 'HS256' ] })
-const { AdminUser } = require('../models')
+const { User } = require('../models')
 
 module.exports = {
   decodeToken,
@@ -25,7 +25,7 @@ function decodeToken(req, res, next) {
 
 async function populateUser(req, res, next) {
   try {
-    req.user = await AdminUser.findByPk(req.user.id)
+    req.user = await User.findByPk(req.user.id)
     next()
   } catch (err) {
     err.handler = 'populateUser'

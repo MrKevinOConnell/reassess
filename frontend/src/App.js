@@ -21,12 +21,12 @@ const App = () => (
       <Route path='/login'>
         <Login />
       </Route>
-      <PrivateRoute path='/signup'>
+      <Route path='/signup'>
         <SignUp/>
-      </PrivateRoute>
-      <Route path='/'>
-        <Home />
       </Route>
+      <PrivateRoute path='/'>
+        <Home />
+      </PrivateRoute>
     </Switch>
   </Router>
 )

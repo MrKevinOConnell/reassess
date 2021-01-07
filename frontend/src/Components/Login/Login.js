@@ -37,6 +37,11 @@ function Login() {
     dispatch({ type: 'LOGIN_USER', payload: { email, password } })
   }
 
+  function handleSignUpClick() {
+    const to = { pathname: 'signup', state: { from: 'login' } }
+    return <Redirect to={to} />
+  }
+
   function getLoginButton(onClick) {
     return (
       <PillButton
@@ -47,6 +52,18 @@ function Login() {
       />
     )
   }
+
+   function getToSignUp() {
+    return (
+      <PillButton
+        linkTo='signup'
+        name='Sign Up'
+        extraClassName='login'
+        id='Login-submit'
+      />
+    )
+  }
+  
 
   if (loggedIn) {
     const to = { pathname: '/', state: { from: location } }
@@ -77,6 +94,8 @@ function Login() {
               id='Login-emailInput'
             />
             { getLoginButton(handleLoginClick) }
+            {getToSignUp(handleSignUpClick)}
+
           </div>
         
       {

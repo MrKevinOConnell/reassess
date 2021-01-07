@@ -3,9 +3,10 @@ import React, {
   useCallback,
   useState,
 } from 'react'
+import { Redirect, useLocation } from 'react-router-dom'
 import Loader from 'react-loader-spinner'
 import { ToastContainer } from 'react-toastify'
-
+import FormInput from '../FormInput/FormInput'
 
 import { store } from '../../store'
 import './SignUp.css'
@@ -14,36 +15,47 @@ import PillButton from '../PillButton/PillButton'
 function SignUp() {
   const [ globalState, dispatch ] = store()
   const {
-    passwords,
-    creatingPasswords,
-    creatingPasswordsError,
-    fetchingPasswords,
-    fetchingPasswordsError,
+    creatingUser,
+    creatingUserError,
+    fetchingUser,
+    fetchingUserError,
   } = globalState
 
-  useEffect(() => {
-    dispatch({ type: 'FETCH_PASSWORDS' })
-  }, [ dispatch ])
+ const [ fieldValues, setFieldValues ] = useState({
+    email: '',
+    password: '',
+    firstName: '',
+    lastName: '',
+    age: 0,
+  })
 
-  const [ newPasswords, setNewPasswords ] = useState('')
-  const onEditPasswords = useCallback((e) => {
-    setNewPasswords(e.target.value)
-  }, [])
+   const {email,password,firstName,lastName,age} = fieldValues
+  const updateState = (e) => {
+    setFieldValues({
+      ...fieldValues,
+      [e.target.name]: e.target.value,
+    })
+  }
+  const onSave = () => {
+    dispatch({ type: 'SIGN_UP',
+      payload: {
+        email: email,
+        password: password,
+        firstName: firstName,
+        lastName: lastName,
+        age: age
+      } })
+  }
 
-  const createNewPasswords = useCallback(() => {
-    dispatch({ type: 'CREATE_PASSWORDS', payload: newPasswords.split(',').map((s) => s.trim()) })
-    setNewPasswords('')
-  }, [ dispatch, newPasswords ])
-
-  const deletePassword = useCallback((passwordId) => {
-    dispatch({ type: 'DELETE_PASSWORD', payload: passwordId })
-  }, [ dispatch ])
-
+  if (creatingUser) {
+    const to = { pathname: 'login', state: { from: 'signup'} }
+    return <Redirect to={to} />
+  }
 
   return (
     <div className='SignUp-container'>
       {
-        (creatingPasswords || fetchingPasswords) && (
+        (creatingUser || fetchingUser) && (
           <Loader
             type='ThreeDots'
             color='#C7C3FB'
@@ -57,52 +69,70 @@ function SignUp() {
       <ToastContainer />
 
       <div className='SignUp-header'>
-        <h1>Password Management</h1>
+        <h1>Sign Up</h1>
       </div>
       {
-        creatingPasswordsError && (
-          <div className='SignUp-error'>Error creating passwords: { creatingPasswordsError }</div>
+        creatingUserError && (
+          <div className='SignUp-error'>Error creating user: { creatingUserError }</div>
         )
       }
       {
-        fetchingPasswordsError && (
-          <div className='SignUp-error'>Error fetching passwords: { fetchingPasswordsError }</div>
+        fetchingUserError && (
+          <div className='SignUp-error'>Error fetching passwords: { fetchingUserError }</div>
         )
       }
       <div className='SignUp-newPasswordsContainer'>
-        <h3>New Passwords</h3>
-        <label className='SignUp-newPasswordsLabel'>
-          Can enter multiple comma separated passwords (the leading and trailing whitespace will be trimmed off).
-        </label>
-        <textarea
-          className='SignUp-newPasswordsTextarea'
-          onChange={onEditPasswords}
-          value={newPasswords}
-          cols='30'
-          rows='10'
-        />
+        
+        
         <PillButton
-          onClick={createNewPasswords}
-          disabled={!newPasswords.length || creatingPasswords}
+          onClick={onSave}
+          disabled={!email.length || creatingUser || !password.length}
           name='Save'
         />
       </div>
       <div className='SignUp-currentPasswordsContainer'>
-        <h3>Current Passwords</h3>
-        <div className='SignUp-passwords'>
-          {
-            passwords.map((password) => (
-              <div key={password.id} className='SignUp-password'>
-                <div className='SignUp-passwordBody'>{ password.body }</div>
-                <div
-                  onClick={deletePassword.bind(null, password.id)}
-                  className='SignUp-passwordDelete'
-                >
-                  X
-                </div>
-              </div>
-            ))
-          }
+       <FormInput
+              label='Email'
+              name='email'
+              value={email}
+              onChange={updateState}
+              id='Login-emailInput'
+            />
+          <div className='Login-controls'>
+            <FormInput
+              label='Password'
+              name='password'
+              type='password'
+              value={password}
+              onChange={updateState}
+              id='Login-emailInput'
+            />
+             <FormInput
+              label='First Name'
+              name='firstName'
+              value={firstName}
+              onChange={updateState}
+              id='Login-emailInput'
+            />
+            <FormInput
+              label='Last Name'
+              name='lastName'
+              
+              value={lastName}
+              onChange={updateState}
+              id='Login-emailInput'
+            />
+             <FormInput
+              label='Age'
+              name='age'
+              type='number'
+              value={age}
+              onChange={updateState}
+              id='Login-emailInput'
+            />
+            
+
+        
         </div>
       </div>
     </div>

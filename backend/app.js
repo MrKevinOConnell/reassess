@@ -30,12 +30,11 @@ if (process.env.NODE_ENV !== 'test') {
 // Body parsing middleware -- turns binary into JS objects
 app.use(bodyParser.json())
 app.use(cookieParser())
-app.use('/api', require('./api'))
-app.use(express.static(path.join(__dirname, '../build')))
 
+app.use(express.static(path.join(__dirname, '../build')))
+app.use('/api', require('./api'))
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../build', 'index.html'))
-  console.log(path.join(__dirname, '../build', 'index.html'))
 })
 
 app.use(errorHandler)

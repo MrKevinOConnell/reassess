@@ -3,9 +3,6 @@ import axios from 'axios'
 const loginAuthReducerActions = {
   // Synchronous actions
   sync: {
-    SET_LOGIN_ERROR: (state, { payload }) => (
-      { ...state, loginError: payload }
-    ),
     LOGIN_USER__STARTED: (state) => (
       { ...state, loggingInUser: true }
     ),
@@ -15,15 +12,16 @@ const loginAuthReducerActions = {
     LOGIN_USER__FINISHED: (state, { payload }) => (
       { ...state, loggedIn: true, loggingInUser: false, loginError: null, currentUser: payload }
     ),
-    SET_PASSWORD__STARTED: (state) => (
-      { ...state, settingPassword: true }
+     SIGN_UP__STARTED: (state) => (
+      { ...state, creatingUser: true }
     ),
-    SET_PASSWORD__FAILED: (state, { payload }) => (
-      { ...state, settingPassword: false, loginError: payload }
+     SIGN_UP__FAILED: (state, { payload }) => (
+      { ...state, creatingUser: false, creatingUserError: payload }
     ),
-    SET_PASSWORD__FINISHED: (state, { payload }) => (
-      { ...state, loggedIn: true, loginError: null, settingPassword: false, currentUser: { ...payload } }
+    SIGN_UP__FINISHED: (state, { payload }) => (
+      { ...state, createdUser: true, creatingUser: false, creatingUserError: null, currentUser: payload }
     ),
+    
     LOGOUT_USER: (state) => {
       document.cookie = 'access_token=;'
       return { ...state, loggedIn: false, loginError: null, currentUser: {} }
@@ -42,13 +40,13 @@ const loginAuthReducerActions = {
         dispatch({ type: 'LOGIN_USER__FAILED', payload: err.response.data })
       }
     },
-    SET_PASSWORD: ({ dispatch }) => async ({ payload }) => {
+    SIGN_UP: ({ dispatch }) => async ({ payload }) => {
       try {
-        dispatch({ type: 'SET_PASSWORD__STARTED' })
-        const res = await axios.post('/api/auth/password', payload)
-        dispatch({ type: 'SET_PASSWORD__FINISHED', payload: res.data })
+        dispatch({ type: 'SIGN_UP__STARTED' })
+        const res = await axios.post('/api/auth/signup', payload)
+        dispatch({ type: 'SIGN_UP__FINISHED', payload: res.data })
       } catch (err) {
-        dispatch({ type: 'SET_PASSWORD__FAILED', payload: err.response.data })
+        dispatch({ type: 'SIGN_UP__FAILED', payload: err.response.data })
       }
     },
   },

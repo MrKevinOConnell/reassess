@@ -1,7 +1,7 @@
 
 'use strict'
-
-const { User } = require('../../models')
+const uuid = require('uuid')
+const { sequelize, User } = require('../../models')
 const { signToken } = require('../../middleware')
 
 module.exports = {
@@ -23,10 +23,11 @@ async function getSessionUser(req, res, next) {
 
 async function signUp(req, res, next) {
   try {
+   
     const { email, password } = req.body
     const user = await User.findOne({ where: { email: req.body.email } })
-    if (user) throw new Error('account with this email made!')
     const id = uuid.v4()
+    if (!user) {
     const newUser = await User.create({
       ...req.body,
       email,
@@ -34,10 +35,11 @@ async function signUp(req, res, next) {
       id,
       firstVersionId: id,
     })
-    res.json(newUser)
-    await user.save()
-    res.cookie('access_token', await signToken(user.id))
-    res.json({ id: user.id, email: user.email })
+    res.json({email: email})
+  }
+  else {
+    res.json({email:email})
+  }
   } catch (err) {
     err.handler = 'createUser'
     next(err)

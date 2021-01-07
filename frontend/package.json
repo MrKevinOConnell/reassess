@@ -10,6 +10,7 @@
     "content-type": "^1.0.4",
     "express": "4",
     "express-jwt": "^6.0.0",
+    "postcss": "^8.2.2",
     "react": "^17.0.1",
     "react-beautiful-dnd": "^13.0.0",
     "react-dom": "^17.0.1",
@@ -21,9 +22,10 @@
     "react-toastify": "^6.0.8",
     "react-tracked": "^1.4.0",
     "use-reducer-async": "^2.0.1",
-     "postcss": "^8.2.2",
-    "web-vitals": "^0.2.4"
+    "web-vitals": "^0.2.4",
+    "uuid": "^8.0.0"
   },
+  "proxy": "http://localhost:8080",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
