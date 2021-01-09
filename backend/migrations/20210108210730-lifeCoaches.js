@@ -1,10 +1,7 @@
 'use strict';
-
-const { sequelize } = require("../models");
-
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('Users', {
+    await queryInterface.createTable('lifeCoaches', {
        id: {
         type: Sequelize.UUID,
         primaryKey: true,
@@ -27,8 +24,8 @@ module.exports = {
        age: {
         type: Sequelize.INTEGER,
       },
-       life_coach: {
-        type: Sequelize.UUID,
+       clients: {
+        type: Sequelize.ARRAY(Sequelize.UUID),
     },
       is_deleted: {
         type: Sequelize.BOOLEAN,
@@ -43,13 +40,13 @@ module.exports = {
         type: Sequelize.DATE,
       },
     })
-     await queryInterface.addConstraint('Users', [ 'email' ], {
+     await queryInterface.addConstraint('lifeCoaches', [ 'email' ], {
       type: 'UNIQUE',
-      name: 'UK__users_email',
+      name: 'UK__lifeCoaches_email',
     })
   },
   
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('Users');
+    await queryInterface.dropTable('lifeCoaches');
   },
 }

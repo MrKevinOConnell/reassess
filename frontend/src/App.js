@@ -13,6 +13,7 @@ import NavBar from './Components/NavBar/NavBar'
 import Home from './Components/Home/Home'
 import Login from './Components/Login/Login'
 import SignUp from './Components/SignUp/SignUp'
+import ChatRoom from './Components/ChatRoom/ChatRoom';
 
 const App = () => (
   <Router>
@@ -24,7 +25,10 @@ const App = () => (
       <Route path='/signup'>
         <SignUp/>
       </Route>
-      <PrivateRoute path='/'>
+      <PrivateRoute path='/chatroom'>
+      <ChatRoom></ChatRoom>
+      </PrivateRoute>
+       <PrivateRoute path='/'>
         <Home />
       </PrivateRoute>
     </Switch>

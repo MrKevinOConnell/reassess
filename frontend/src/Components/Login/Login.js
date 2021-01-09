@@ -8,7 +8,6 @@ import FormInput from '../FormInput/FormInput'
 function Login() {
   const [ globalState, dispatch ] = store()
   const {
-    currentUser,
     loginError,
     loggedIn,
   } = globalState

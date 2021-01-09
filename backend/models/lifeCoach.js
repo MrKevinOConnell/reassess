@@ -2,7 +2,7 @@
 const bcrypt = require('bcrypt')
 
 module.exports = (sequelize, DataTypes) => {
-  const User = sequelize.define('User', {
+  const lifeCoach = sequelize.define('lifeCoach', {
       id: {
       type: DataTypes.UUID,
       primaryKey: true,
@@ -39,11 +39,11 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       defaultValue: DataTypes.NOW,
     },
-    lifeCoach: {
-        type: DataTypes.UUID,
+    clients: {
+        type: DataTypes.ARRAY(DataTypes.UUID),
     },
-    age: { type:DataTypes.INTEGER }
-  }, {tableName: 'Users',
+    age: DataTypes.INTEGER
+  }, {tableName: 'lifeCoaches',
     underscored: true,
     defaultScope: {
       where: {
@@ -51,8 +51,8 @@ module.exports = (sequelize, DataTypes) => {
       },
     },
   });
- User.prototype.validPassword = function Users_validPassword(password) {
+ lifeCoach.prototype.validPassword = function lifeCoach_validPassword(password) {
     return bcrypt.compareSync(password, this.password)
   }
-  return User;
+  return lifeCoach;
 };

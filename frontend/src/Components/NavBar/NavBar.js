@@ -18,6 +18,7 @@ function NavBar({ location: { pathname } }) {
   return (
     <div className='NavBar-container'>
       <PillButton linkTo='/' name='Home' selected={pathname === '/'} />
+      <PillButton linkTo='/chatroom' name='Chat' selected={pathname === '/chatroom'} />
       <PillButton onClick={logout} name='Logout' />
     </div>
   )

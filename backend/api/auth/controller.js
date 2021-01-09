@@ -50,7 +50,7 @@ async function login(req, res, next) {
   try {
     const user = await User.findOne({ where: { email: req.body.email } })
     if (!user) {
-      throw new Error('Somebody already made an account with this email.')
+      throw new Error('no account made with this email')
     } else if (!user.validPassword(req.body.password)) {
       throw new Error('Incorrect password.')
     } else {

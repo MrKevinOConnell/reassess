@@ -48,7 +48,7 @@ function SignUp() {
   }
 
   if (creatingUser) {
-    const to = { pathname: 'login', state: { from: 'signup'} }
+    const to = { pathname: '/login', state: { from: '/signup'} }
     return <Redirect to={to} />
   }
 
