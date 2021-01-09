@@ -8,7 +8,7 @@
     "@testing-library/user-event": "^12.1.10",
     "axios": "^0.21.1",
     "content-type": "^1.0.4",
-    "express": "4",
+     "express": ">=4.5.0",
     "express-jwt": "^6.0.0",
     "formik": "^2.2.6",
     "passport": "^0.4.1",
