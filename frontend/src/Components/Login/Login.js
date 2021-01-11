@@ -55,7 +55,7 @@ function Login() {
    function getToSignUp() {
     return (
       <PillButton
-        linkTo='signup'
+        linkTo='/signup'
         name='Sign Up'
         extraClassName='login'
         id='Login-submit'

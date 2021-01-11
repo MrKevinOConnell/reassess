@@ -1,7 +1,7 @@
 'use strict';
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('lifeCoaches', {
+    await queryInterface.createTable('LifeCoaches', {
        id: {
         type: Sequelize.UUID,
         primaryKey: true,
@@ -40,13 +40,13 @@ module.exports = {
         type: Sequelize.DATE,
       },
     })
-     await queryInterface.addConstraint('lifeCoaches', [ 'email' ], {
+     await queryInterface.addConstraint('LifeCoaches', [ 'email' ], {
       type: 'UNIQUE',
       name: 'UK__lifeCoaches_email',
     })
   },
   
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('lifeCoaches');
+    await queryInterface.dropTable('LifeCoaches');
   },
 }

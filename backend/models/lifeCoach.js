@@ -43,7 +43,7 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.ARRAY(DataTypes.UUID),
     },
     age: DataTypes.INTEGER
-  }, {tableName: 'lifeCoaches',
+  }, {tableName: 'LifeCoaches',
     underscored: true,
     defaultScope: {
       where: {

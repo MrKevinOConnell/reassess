@@ -13,7 +13,6 @@ process.env.NODE_ENV = process.env.NODE_ENV || 'development'
 
 const express = require('express')
 const bodyParser = require('body-parser')
-const morgan = require('morgan')
 const cookieParser = require('cookie-parser')
 
 const {
@@ -21,12 +20,9 @@ const {
 } = require('./middleware')
 
 const app = express()
+var http = require('http').createServer(app);
 
 // Request logging middleware
-if (process.env.NODE_ENV !== 'test') {
-  // You may want to move this out of the conditional when debugging test failures.
-  app.use(morgan('dev'))
-}
 // Body parsing middleware -- turns binary into JS objects
 app.use(bodyParser.json())
 app.use(cookieParser())
@@ -35,13 +31,58 @@ app.use(express.static(path.join(__dirname, '../')))
 
 app.use('/api', require('./api'))
 
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '../build', 'index.html'))
-})
-
+app.get('/', function (req, res) {
+  res.sendFile(__dirname + '/index.html');
+});
 app.use(errorHandler)
 
+const PORT = process.env.PORT || 8080
+http.listen(PORT, () => {
+  // eslint-disable-next-line
+  console.log('Listening on PORT:', PORT)
+})
+var io = require('socket.io')(http, {
+  cors: {
+    origin: "*",
+  },
+});
+
+const NEW_CHAT_MESSAGE_EVENT = "newChatMessage";
 
 
+io.on("connection", (socket) => {
+  console.log(`Client ${socket.id} connected`);
 
-module.exports = { app }
+  // Join a conversation
+  const { roomId } = socket.handshake.query;
+  socket.join(roomId);
+
+  // Listen for new messages
+  socket.on(NEW_CHAT_MESSAGE_EVENT, (data) => {
+    io.in(roomId).emit(NEW_CHAT_MESSAGE_EVENT, data);
+  });
+
+  // Leave the room if the user closes the socket
+  socket.on("disconnect", () => {
+    console.log(`Client ${socket.id} diconnected`);
+    socket.leave(roomId);
+  });
+});
+
+//listening stuff
+
+/* 
+// when the client emits 'typing', we broadcast it to others
+  socket.on('typing', () => {
+    socket.broadcast.emit('typing', {
+      username: socket.username
+    });
+  });
+
+  // when the client emits 'stop typing', we broadcast it to others
+  socket.on('stop typing', () => {
+    socket.broadcast.emit('stop typing', {
+      username: socket.username
+    });
+  });
+  */

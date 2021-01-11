@@ -9,10 +9,14 @@ const initialState = {
   loggedIn: false,
   loginError: null,
   currentUser: {},
- 
-  
-  
 
+  //grabbing and updating convos
+  currentConvo: [],
+  fetchingCurrentConvo: null,
+  fetchingCurrentConvoError: null,
+  updatingConvo: null,
+  updatingConvoError: null,
+  currentEmail: '',
   fetchingUser: null,
   fetchingUserError: null,
   creatingUser: null,

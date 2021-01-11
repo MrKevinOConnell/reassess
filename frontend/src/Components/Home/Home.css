@@ -1,60 +1,31 @@
-.Home-container {
-  margin: 0 auto;
-  width: 80%;
-  padding-top: 115px;
+.home-container {
+    position: fixed;
+    left: 10%;
+    right: 10%;
+    top: 50%;
+    transform: translate(0, -50%);
+    display: flex;
+    flex-direction: column;
 }
 
-.Home-loading {
-  position: absolute;
-  top: 30%;
-  width: 85%;
+.text-input-field {
+    padding: 24px 12px;
+    border-radius: 7px;
+    font-size: 24px;
 }
 
-.Home-titleContainer {
-  margin-bottom: 10px;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
+.text-input-field:focus {
+    outline: none;
 }
 
-.Home-titleText {
-  align-self: center;
-}
-
-.Home-categories, .Home-intents {
-  display: flex;
-  flex-wrap: wrap;
-  width: 70%;
-}
-
-.Home-categories {
-}
-
-.Home-navigation {
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.Home-subTitleContainer {
-  margin-bottom: 20px;
-  padding-bottom: 5px;
-}
-
-.Home-phrasesContainer {
-  
-}
-
-.Home-phrase {
-  text-align: left;
-  padding: 5px;
-  margin-top: 5px;
-}
-
-.Home-newPhraseContainer {
-  display: flex;
-  justify-content: center;
-  border-top: 1px #6558F5 solid;
-  padding-top: 15px;
-  margin-top: 15px;
-  margin-bottom: 75px;
+.enter-room-button {
+    margin-top: 20px;
+    padding: 24px 12px;
+    font-size: 28px;
+    background: #31a24c;
+    color: white;
+    font-weight: 600;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 7px;
 }

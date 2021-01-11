@@ -5,12 +5,10 @@ const router = require('express').Router()
 
 const { decodeToken, populateUser } = require('../../middleware')
 const {
- getChatRoomMessages,
- getChatRooms,
-createChatRoom
+ getChatRoom,
+ updateChatRoom,
 } = require('./controller')
 
-router.get('/messages/:chatRoomName',getChatRoomMessages)
-router.post('/', getChatRooms)
-router.post('/', createChatRoom)
+router.get('/:chatRoomId/messages',getChatRoom)
+router.post('/:chatRoomId/messages', updateChatRoom)
 module.exports = router

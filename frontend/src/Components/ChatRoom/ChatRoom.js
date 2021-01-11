@@ -1,54 +1,57 @@
-import React from "react";
-import { useEffect, useState } from "react";
-import io from "socket.io-client";
+import React, { useState, useEffect } from "react";
 import "./ChatRoom.css";
 import { store } from '../../store'
+import useChat from "../useChat";
 
 
-
-function ChatRoom() {
+const ChatRoom = (props) => {
     const [ globalState, dispatch ] = store()
   const {
     currentUser,
+    currentConvo
   } = globalState
-  const socket = io.connect("http://localhost:3000");
-  const { roomId } = '100'; // Gets roomId from URL
-  const [messages, setNewMessage] = useState({message: '', chat: ['Hello','??????','toxic']});; // Message to be sent
   
-  const { message, chat } = messages
 
-const updateState = (e) => {
-    setNewMessage({
-      ...messages,
-      [e.target.name]: e.target.value,
-    })
-  }
+  
 
-  const handleSendMessage = () => {
-   socket.emit("chat message", message);
+  const { roomId } = '100';
+  const { messages, sendMessage } = useChat(roomId);
+  const [newMessage, setNewMessage] = React.useState("");
+
+
+  
+  const handleNewMessageChange = (event) => {
+    setNewMessage(event.target.value);
   };
 
-  
-  useEffect(() => {
-    socket.on("chat message", ({ id, msg }) => {
-      // Add new messages to existing messages in "chat"
-     setNewMessage({...messages, chat: [...chat, { id, msg }] })
-    });
-  },[ messages.chat] )
+
+  const handleSendMessage = () => {
+    sendMessage(newMessage);
+    setNewMessage("");
+  };
   return (
     <div className="chat-room-container">
-      <h1 className="room-name">Room: {roomId}</h1>
+      <h1 className="room-name">{currentUser.firstName}</h1>
       <div className="messages-container">
-     {
-         chat.map((msg,idx) => (
-              <span>{msg}</span>
-         ))
-     }
+        <ol className="messages-list">
+          {
+          messages.map((message, idx) => (
+            
+            <li
+              key={idx}
+              className={`message-item ${
+                message.ownedByCurrentUser ? "my-message" : "received-message"
+              }`}
+            >
+              {message.body}
+            </li>
+          ))
+         }
+        </ol>
       </div>
       <textarea
-        value={message}
-        onChange={updateState}
-        name='message'
+        value={newMessage}
+        onChange={handleNewMessageChange}
         placeholder="Write message..."
         className="new-message-input-field"
       />

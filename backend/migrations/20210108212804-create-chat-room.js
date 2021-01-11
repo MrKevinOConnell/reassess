@@ -4,25 +4,23 @@ module.exports = {
     await queryInterface.createTable('ChatRooms', {
       id: {
         allowNull: false,
-        autoIncrement: true,
-        primaryKey: true,
-        type: Sequelize.INTEGER
-      },
-      name: {
         type: Sequelize.STRING
       },
-      createdAt: {
+      messages: {
+        type: Sequelize.ARRAY(Sequelize.JSON)
+      },
+      is_deleted: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: false,
+      },
+      created_at: {
         allowNull: false,
         type: Sequelize.DATE
       },
-      updatedAt: {
+      updated_at: {
         allowNull: false,
         type: Sequelize.DATE
       },
-    })
-    return queryInterface.addConstraint("ChatRooms", ["name"], {
-      type: "unique",
-      name: "unique_name",
     })
   },
   down: async (queryInterface, Sequelize) => {

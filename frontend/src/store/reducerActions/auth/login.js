@@ -10,7 +10,7 @@ const loginAuthReducerActions = {
       { ...state, loggingInUser: false, loginError: payload }
     ),
     LOGIN_USER__FINISHED: (state, { payload }) => (
-      { ...state, loggedIn: true, loggingInUser: false, loginError: null, currentUser: payload }
+      { ...state, loggedIn: true, loggingInUser: false, loginError: null, currentUser: {...payload } }
     ),
      SIGN_UP__STARTED: (state) => (
       { ...state, creatingUser: true }
@@ -19,7 +19,7 @@ const loginAuthReducerActions = {
       { ...state, creatingUser: false, creatingUserError: payload }
     ),
     SIGN_UP__FINISHED: (state, { payload }) => (
-      { ...state, createdUser: true, creatingUser: false, creatingUserError: null, currentUser: payload }
+      { ...state, createdUser: true, creatingUser: false, creatingUserError: null, currentUser: {...payload} }
     ),
     
     LOGOUT_USER: (state) => {
@@ -34,8 +34,8 @@ const loginAuthReducerActions = {
     LOGIN_USER: ({ dispatch }) => async ({ payload }) => {
       try {
         dispatch({ type: 'LOGIN_USER__STARTED' })
-        await axios.post('/api/auth/login', payload)
-        dispatch({ type: 'LOGIN_USER__FINISHED', payload })
+       const res = await axios.post('/api/auth/login', payload)
+        dispatch({ type: 'LOGIN_USER__FINISHED', payload: res.data })
       } catch (err) {
         dispatch({ type: 'LOGIN_USER__FAILED', payload: err.response.data })
       }
