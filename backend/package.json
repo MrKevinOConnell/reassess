@@ -6,7 +6,7 @@
     "seed": "./node_modules/.bin/sequelize db:seed:all",
     "seq": "./node_modules/.bin/sequelize",
     "predevServer": "yarn migrate && yarn seed",
-    "resetEverything": "dropdb music_match && createdb music_match && yarn devServer",
+    "resetEverything": "dropdb reassess && createdb reassess && yarn devServer",
     "devServer": "nodemon --max-old-space-size=512 app.js",
     "preserver": "sequelize db:migrate && sequelize db:seed:all",
     "server": "node index.js",

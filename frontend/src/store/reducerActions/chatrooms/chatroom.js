@@ -21,6 +21,15 @@ const chatroomReducerActions = {
    ADD_MESSAGE__FINISHED: (state, { payload }) => (
       { ...state, updatingCurrentConvo: false, updatingConvoError: null }
    ),
+  CHANGE_ROOM_ID__STARTED: (state) => (
+      { ...state, updatingRoomId: true}
+    ),
+   CHANGE_ROOM_ID__FAILED: (state, { payload }) => (
+      { ...state, updatingRoomId: false, updatingRoomIdError: payload }
+    ),
+   CHANGE_ROOM_ID__FINISHED: (state, { payload }) => (
+      { ...state, updatingRoomId: false, updatingRoomIdError: null, roomId: payload }
+   ),
   },
 
   // Asynchronous actions
@@ -29,10 +38,11 @@ const chatroomReducerActions = {
   async: {
     GET_MESSAGES: ({ dispatch }) => async ({ payload }) => {
       try {
-         const message = { ...payload }
-         console.log('messages ',message)
+         const chatId = payload
         dispatch({ type: 'GET_MESSAGES__STARTED' })
-        const res = await axios.get(`/api/chatrooms/100/messages`)
+        const res = await axios.get(`/api/chatrooms/${chatId}/messages`,{params: {
+          id: chatId
+        }})
         dispatch({ type: 'GET_MESSAGES__FINISHED', payload: res.data })
       } catch (err) {
         dispatch({ type: 'GET_MESSAGES__FAILED', payload: err.response.data })
@@ -40,12 +50,21 @@ const chatroomReducerActions = {
     },
     ADD_MESSAGE: ({ dispatch }) => async ({ payload }) => {
       try {
-          const message = { ...payload }
+        const message = payload.id
         dispatch({ type: 'ADD_MESSAGE__STARTED' })
-        const res = await axios.post(`/api/chatrooms/100/messages`, message)
+        const res = await axios.post(`/api/chatrooms/${ message}/messages`,payload)
         dispatch({ type: 'ADD_MESSAGE__FINISHED', payload: res.data })
       } catch (err) {
         dispatch({ type: 'ADD_MESSAGE__FAILED', payload: err.response.data })
+      }
+    },
+    CHANGE_ROOM_ID: ({ dispatch }) => async ({ payload }) => {
+      try {
+        const id = payload
+        dispatch({ type: 'CHANGE_ROOM_ID__STARTED' })
+        dispatch({ type: 'CHANGE_ROOM_ID__FINISHED', payload: id })
+      } catch (err) {
+        dispatch({ type: 'CHANGE_ROOM_ID__FAILED', payload: err.response.data })
       }
     },
   },

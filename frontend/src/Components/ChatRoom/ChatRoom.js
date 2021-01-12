@@ -2,20 +2,17 @@ import React, { useState, useEffect } from "react";
 import "./ChatRoom.css";
 import { store } from '../../store'
 import useChat from "../useChat";
-
+import PropTypes from 'prop-types'
 
 const ChatRoom = (props) => {
     const [ globalState, dispatch ] = store()
   const {
     currentUser,
-    currentConvo
+    roomId
   } = globalState
-  
-
-  
-
-  const { roomId } = '100';
-  const { messages, sendMessage } = useChat(roomId);
+    
+  const [id, setId] = useState('100');
+  const { messages, sendMessage } = useChat(id);
   const [newMessage, setNewMessage] = React.useState("");
 
 
@@ -24,6 +21,9 @@ const ChatRoom = (props) => {
     setNewMessage(event.target.value);
   };
 
+  useEffect(() => {
+    setId(roomId)
+  }, [roomId])
 
   const handleSendMessage = () => {
     sendMessage(newMessage);

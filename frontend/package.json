@@ -20,6 +20,7 @@
     "react-icons": "^3.10.0",
     "react-loader-spinner": "^3.1.14",
     "react-paginate": "^6.5.0",
+    "react-pro-sidebar": "^0.5.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.1",
     "react-toastify": "^6.0.8",

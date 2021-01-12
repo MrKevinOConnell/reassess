@@ -14,9 +14,10 @@ async function updateChatRoom(req, res, next) {
   req.transaction = await sequelize.transaction()
   try {
     const opts = { transaction: req.transaction }
+    const id = req.body.id
      const chatRoom = await ChatRoom.findOne({
       where: {
-        id: '100'
+        id: id,
       },
     },opts);
     const messages = chatRoom.messages
@@ -37,10 +38,11 @@ async function getChatRoom(req, res, next) {
   req.transaction = await sequelize.transaction()
   try {
     const opts = { transaction: req.transaction }
-const chatRoomId = req.body.id
+  
+const id = req.query.id
     const chatRoom = await ChatRoom.findOne({
       where: {
-        id: '100',
+        id: id,
       },
     },opts);
     if(chatRoom) {
@@ -48,7 +50,7 @@ const chatRoomId = req.body.id
     res.json(chatRoom.messages)
     }
     else {
-      await ChatRoom.create({id: '100', messages: [] })
+      await ChatRoom.create({id: id, messages: [] })
       await req.transaction.commit()
       res.json({messages: []})
     }

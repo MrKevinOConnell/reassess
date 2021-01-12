@@ -11,6 +11,9 @@ const initialState = {
   currentUser: {},
 
   //grabbing and updating convos
+  roomId: '100',
+  updatingRoomId: null,
+  updatingRoomIdError: null,
   currentConvo: [],
   fetchingCurrentConvo: null,
   fetchingCurrentConvoError: null,

@@ -16,28 +16,17 @@ const useChat = (id) => {
   const socketRef = useRef();
 
   useEffect(() => {
-    dispatch({ type: 'GET_MESSAGES', payload: id,})
-    },[]);
+    setMessages([])
+    dispatch({ type: 'GET_MESSAGES', payload: id})
+    },[id]);
 
 
     useEffect(() => {
-       dispatch({ type: 'GET_MESSAGES', payload: id,})
       if(currentConvo.length) {
-        console.log('currentconvo',currentConvo)
-         /* const newMsg = {
-         ...message,
-        ownedByCurrentUser: message.senderId === currentUser.id,
-        }
-        */
-       
        for (var i = 0; i < currentConvo.length; i++) {
   currentConvo[i].ownedByCurrentUser = currentConvo[i].senderId === currentUser.id;
 };
-       
-         setMessages(currentConvo)
-       
-      console.log('messages after for each', messages)
-      
+  setMessages(currentConvo)
     }
     },[currentConvo]);
     
@@ -52,13 +41,13 @@ const useChat = (id) => {
         ownedByCurrentUser: message.senderId === currentUser.id,
       };
       setMessages((messages) => [...messages, incomingMessage]);
-      dispatch({ type: 'ADD_MESSAGE', payload: { message: message }})
+      dispatch({ type: 'ADD_MESSAGE', payload: {message, id}} )
     });
 
     return () => {
       socketRef.current.disconnect();
     };
-  }, []);
+  }, [id]);
 
   const sendMessage = (messageBody) => {
     socketRef.current.emit(NEW_CHAT_MESSAGE_EVENT, {

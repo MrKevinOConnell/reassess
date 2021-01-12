@@ -9,6 +9,6 @@ const {
  updateChatRoom,
 } = require('./controller')
 
-router.get('/:chatRoomId/messages',getChatRoom)
-router.post('/:chatRoomId/messages', updateChatRoom)
+router.get('/:id/messages',getChatRoom)
+router.post('/:id/messages', updateChatRoom)
 module.exports = router
