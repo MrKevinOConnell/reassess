@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import socketIOClient from "socket.io-client";
 import axios from 'axios'
 import { store } from '../store'
+const uuid = require('uuid')
 const NEW_CHAT_MESSAGE_EVENT = "newChatMessage";
 const SOCKET_SERVER_URL = "http://localhost:8080";
 
@@ -38,7 +39,7 @@ const useChat = (id) => {
     socketRef.current.on(NEW_CHAT_MESSAGE_EVENT, (message) => {
       const incomingMessage = {
         ...message,
-        ownedByCurrentUser: message.senderId === currentUser.id,
+        ownedByCurrentUser: message.user._id === currentUser.id,
       };
       setMessages((messages) => [...messages, incomingMessage]);
       dispatch({ type: 'ADD_MESSAGE', payload: {message, id}} )
@@ -51,8 +52,12 @@ const useChat = (id) => {
 
   const sendMessage = (messageBody) => {
     socketRef.current.emit(NEW_CHAT_MESSAGE_EVENT, {
-      body: messageBody,
-      senderId: currentUser.id,
+      _id: uuid.v4(),
+      createdAt: new Date(),
+      text: messageBody,
+      user:{
+        _id: currentUser.id,
+      name: 'kevin'}
     });
   };
 

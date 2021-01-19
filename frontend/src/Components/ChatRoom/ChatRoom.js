@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import "./ChatRoom.css";
 import { store } from '../../store'
 import useChat from "../useChat";
-import PropTypes from 'prop-types'
 
 const ChatRoom = (props) => {
     const [ globalState, dispatch ] = store()
@@ -15,9 +14,8 @@ const ChatRoom = (props) => {
   const { messages, sendMessage } = useChat(id);
   const [newMessage, setNewMessage] = React.useState("");
 
-
-  
   const handleNewMessageChange = (event) => {
+    
     setNewMessage(event.target.value);
   };
 
@@ -36,14 +34,13 @@ const ChatRoom = (props) => {
         <ol className="messages-list">
           {
           messages.map((message, idx) => (
-            
             <li
               key={idx}
               className={`message-item ${
                 message.ownedByCurrentUser ? "my-message" : "received-message"
               }`}
             >
-              {message.body}
+              {message.text}
             </li>
           ))
          }

@@ -1,19 +1,19 @@
 .PillButton-container {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-around;
   padding: 10px;
-  margin: 5px;
-  border-radius: 5px;
+  margin: 8px;
+  border-radius: 9px;
   border: 1px solid #C7C3FB;
-  color: #6558F5;
+  color: gray;
   cursor: pointer;
   height: 20px;
 }
 
 .PillButton-container.selected {
   color: white;
-  background-color: #6558F5;
+  background-color: gray;
   font-weight: bold;
 }
 
@@ -55,12 +55,12 @@
 
 .PillButton-container.intent.selected {
   background-color: white;
-  color: #6558F5;
+  color: gray;
 }
 
 .PillButton-container.add {
   background-color: white;
-  color: #6558F5;
+  color: gray;
 }
 
 .PillButton-container.create {
@@ -75,7 +75,7 @@
 }
 
 .intent .PillButton-selectedIcon {
-  border-left: solid 1px #6558F5;
+  border-left: solid 1px gray;
 }
 
 .category .PillButton-selectedIcon {
@@ -84,7 +84,7 @@
 
 .PillButton-container a {
   text-decoration: none;
-  color: #6558F5;
+  color: gray;
 }
 
 .PillButton-container.release a {

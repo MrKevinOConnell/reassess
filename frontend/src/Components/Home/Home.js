@@ -15,7 +15,9 @@ const Home = () => {
 
   return (
     <div className='home-container'>
-      <PillButton
+       <div className='home-buttons-container'>
+         
+<PillButton
         onClick={() => handleClick('100')}
         name='100'
         extraClassName='login'
@@ -27,6 +29,19 @@ const Home = () => {
         extraClassName='login'
         id='Login-submit'
       />
+      <PillButton
+        onClick={() => handleClick('300')}
+        name='300'
+        extraClassName='login'
+        id='Login-submit'
+      />
+      <PillButton
+        onClick={() => handleClick('400')}
+        name='400'
+        extraClassName='login'
+        id='Login-submit'
+      />
+      </div>
     
     <ChatRoom id/>
     </div>

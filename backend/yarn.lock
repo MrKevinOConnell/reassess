@@ -449,7 +449,7 @@ axios@^0.19.2:
   dependencies:
     follow-redirects "1.5.10"
 
-axios@^0.21.1:
+axios@^0.21.0, axios@^0.21.1:
   version "0.21.1"
   resolved "https://registry.yarnpkg.com/axios/-/axios-0.21.1.tgz#22563481962f4d6bde9a76d516ef0e5d3c09b2b8"
   integrity sha512-dKQiRHxGD9PPRIUNIWvZhPTPpl1rf/OxTYKsqKUDjBwYylTvV7SjSHJb9ratfyzM6wCdLCOYLzs73qpg5c4iGA==
@@ -518,6 +518,13 @@ body-parser@1.19.0, body-parser@^1.19.0:
     qs "6.7.0"
     raw-body "2.4.0"
     type-is "~1.6.17"
+
+booste@^0.0.6:
+  version "0.0.6"
+  resolved "https://registry.yarnpkg.com/booste/-/booste-0.0.6.tgz#84bb3a859a2b2a645f4562ee1e13738c4a336dab"
+  integrity sha512-QO4m8e/R1o8e1ivgLDW+IM3g/jKr11pnKmqr/1whhkLjzU43PSHzqqA6jFcndX9RTyB1j5thQ6FwpeIM9+Bhjw==
+  dependencies:
+    axios "^0.21.0"
 
 boxen@^4.2.0:
   version "4.2.0"

@@ -2,7 +2,7 @@
 const bcrypt = require('bcrypt')
 
 module.exports = (sequelize, DataTypes) => {
-  const lifeCoach = sequelize.define('lifeCoach', {
+  const lifeCoach = sequelize.define('LifeCoach', {
       id: {
       type: DataTypes.UUID,
       primaryKey: true,

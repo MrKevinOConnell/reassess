@@ -52,7 +52,7 @@ const id = req.query.id
     else {
       await ChatRoom.create({id: id, messages: [] })
       await req.transaction.commit()
-      res.json({messages: []})
+      res.json([])
     }
   } catch (err) {
     await req.transaction.rollback()

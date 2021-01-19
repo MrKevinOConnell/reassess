@@ -12,8 +12,14 @@ module.exports = {
       first_name: {
         type: Sequelize.TEXT,
       },
-      last_name: {
-        type: Sequelize.TEXT,
+      short_term_goal: {
+      type: Sequelize.TEXT,
+      },
+       mid_term_goal: {
+      type: Sequelize.TEXT,
+      },
+      long_term_goal: {
+      type: Sequelize.TEXT,
       },
       bio: {
         type: Sequelize.TEXT,
