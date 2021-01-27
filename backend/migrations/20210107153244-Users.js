@@ -12,14 +12,17 @@ module.exports = {
       first_name: {
         type: Sequelize.TEXT,
       },
-      short_term_goal: {
-      type: Sequelize.TEXT,
+      daily_goals: {
+      type: Sequelize.ARRAY(Sequelize.TEXT),
       },
-       mid_term_goal: {
-      type: Sequelize.TEXT,
+       weekly_goals: {
+       type: Sequelize.ARRAY(Sequelize.TEXT),
       },
-      long_term_goal: {
-      type: Sequelize.TEXT,
+      monthly_goals: {
+     type: Sequelize.ARRAY(Sequelize.TEXT),
+      },
+      yearly_goals: {
+       type: Sequelize.ARRAY(Sequelize.TEXT),
       },
       bio: {
         type: Sequelize.TEXT,

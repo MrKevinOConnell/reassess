@@ -6,8 +6,9 @@ const { signToken } = require('../../middleware')
 
 module.exports = {
   getSessionUser,
-  loginLifeCoach,
-  signUpLifeCoach,
+  loginUser,
+  signUpUser,
+  updateGoals
 }
 
 async function getSessionUser(req, res, next) {
@@ -24,14 +25,15 @@ async function getSessionUser(req, res, next) {
   }
 }
 
-async function signUpLifeCoach(req, res, next) {
+async function signUpUser(req, res, next) {
   try {
     req.transaction = await sequelize.transaction()
     const { email, password } = req.body
-    const lifeCoach = await LifeCoach.findOne({ where: { email: req.body.email } })
+    const user = await User.findOne({ where: { email: req.body.email } })
     const id = uuid.v4()
     if (!user) {
-    const newLifeCoach = await LifeCoach.create({
+      
+    const newUser = await User.create({
       ...req.body,
       email,
       password,
@@ -39,11 +41,11 @@ async function signUpLifeCoach(req, res, next) {
       firstVersionId: id,
     })
     await req.transaction.commit()
-    res.json(newLifeCoach)
+    res.json(newUser)
   }
   else {
     await req.transaction.commit()
-    res.json(lifeCoach)
+    res.json(user)
   }
   } catch (err) {
     await req.transaction.rollback()
@@ -52,22 +54,36 @@ async function signUpLifeCoach(req, res, next) {
   }
 }
 
-async function loginLifeCoach(req, res, next) {
+async function loginUser(req, res, next) {
   try {
      req.transaction = await sequelize.transaction()
-    const lifeCoach = await LifeCoach.findOne({ where: { email: req.body.email } })
-    if (!lifeCoach) {
+    const user = await User.findOne({ where: { email: req.body.email } })
+    if (!user) {
       throw new Error('no account made with this email')
-    } else if (!lifeCoach.validPassword(req.body.password)) {
+    } else if (!user.validPassword(req.body.password)) {
       throw new Error('Incorrect password.')
     } else {
       await req.transaction.commit()
-      res.cookie('access_token', await signToken(lifeCoach.id))
-      res.json({ id: lifeCoach.id, email: lifeCoach.email, firstName: lifeCoach.firstName })
+      res.json(user)
     }
   } catch (err) {
     await req.transaction.rollback()
     err.handler = 'login'
+    next(err)
+  }
+}
+
+async function updateGoals(req, res, next) {
+  try {
+     req.transaction = await sequelize.transaction()
+    const { dailyGoals , weeklyGoals, monthlyGoals, yearlyGoals } = req.body
+    const user = await User.findOne({ where: { email: req.body.email } })
+    user.update({dailyGoals,weeklyGoals,monthlyGoals,yearlyGoals})
+    await req.transaction.commit()
+    res.json(user)
+  } catch (err) {
+    await req.transaction.rollback()
+    err.handler = 'updateGoals'
     next(err)
   }
 }

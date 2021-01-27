@@ -1,5 +1,5 @@
 'use strict';
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcrypt');
 
 module.exports = (sequelize, DataTypes) => {
   const User = sequelize.define('User', {
@@ -41,7 +41,19 @@ module.exports = (sequelize, DataTypes) => {
     lifeCoach: {
         type: DataTypes.UUID,
     },
-    age: { type:DataTypes.INTEGER }
+    age: { type: DataTypes.INTEGER },
+    dailyGoals: {
+       type: DataTypes.ARRAY(DataTypes.TEXT),
+    },
+    weeklyGoals: {
+      type: DataTypes.ARRAY(DataTypes.TEXT)
+    },
+    monthlyGoals: {
+      type: DataTypes.ARRAY(DataTypes.TEXT),
+    },
+    yearlyGoals: {
+      type: DataTypes.ARRAY(DataTypes.TEXT),
+    }
   }, {tableName: 'Users',
     underscored: true,
     defaultScope: {

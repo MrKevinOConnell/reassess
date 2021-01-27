@@ -6,11 +6,13 @@ const router = require('express').Router()
 const { decodeToken, populateUser } = require('../../middleware')
 const {
   getSessionUser,
-  signUpLifeCoach,
-  loginLifeCoach,
+  signUpUser,
+  loginUser,
+  updateGoals
 } = require('./controller')
 
 router.get('/session', decodeToken, populateUser, getSessionUser)
-router.post('/signup', signUpLifeCoach)
-router.post('/login', loginLifeCoach)
+router.post('/signup', signUpUser)
+router.post('/login', loginUser)
+router.post('/:id/goals', updateGoals)
 module.exports = router
