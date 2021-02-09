@@ -34,7 +34,7 @@ const loginAuthReducerActions = {
     LOGIN_USER: ({ dispatch }) => async ({ payload }) => {
       try {
         dispatch({ type: 'LOGIN_USER__STARTED' })
-       const res = await axios.post('/api/auth/login', payload)
+       const res = await axios.post('/api/lifeCoach/login', payload)
         dispatch({ type: 'LOGIN_USER__FINISHED', payload: res.data })
       } catch (err) {
         dispatch({ type: 'LOGIN_USER__FAILED', payload: err.response.data })
@@ -43,7 +43,7 @@ const loginAuthReducerActions = {
     SIGN_UP: ({ dispatch }) => async ({ payload }) => {
       try {
         dispatch({ type: 'SIGN_UP__STARTED' })
-        const res = await axios.post('/api/auth/signup', payload)
+        const res = await axios.post('/api/lifeCoach/signup', payload)
         dispatch({ type: 'SIGN_UP__FINISHED', payload: res.data })
       } catch (err) {
         dispatch({ type: 'SIGN_UP__FAILED', payload: err.response.data })

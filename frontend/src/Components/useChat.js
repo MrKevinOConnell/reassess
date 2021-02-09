@@ -25,7 +25,7 @@ const useChat = (id) => {
     useEffect(() => {
       if(currentConvo.length) {
        for (var i = 0; i < currentConvo.length; i++) {
-  currentConvo[i].ownedByCurrentUser = currentConvo[i].senderId === currentUser.id;
+  currentConvo[i].ownedByCurrentUser = currentConvo[i].user._id === currentUser.id;
 };
   setMessages(currentConvo)
     }

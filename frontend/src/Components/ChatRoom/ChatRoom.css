@@ -9,6 +9,11 @@
     margin: 125px;
 }
 
+.chat-room-bubble {
+    display: flex;
+    flex-direction: column;
+}
+
 .room-name {
     margin-top: 0;
 }
@@ -36,6 +41,8 @@
 
 .message-item {
     width: 55%;
+    display: flex;
+    flex-direction: column;
     margin: 8px;
     padding: 12px 8px;
     word-break: break-word;

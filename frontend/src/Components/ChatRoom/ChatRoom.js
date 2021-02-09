@@ -41,6 +41,7 @@ const ChatRoom = (props) => {
               }`}
             >
               {message.text}
+              
             </li>
           ))
          }

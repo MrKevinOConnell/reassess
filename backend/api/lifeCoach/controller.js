@@ -30,7 +30,7 @@ async function signUpLifeCoach(req, res, next) {
     const { email, password } = req.body
     const lifeCoach = await LifeCoach.findOne({ where: { email: req.body.email } })
     const id = uuid.v4()
-    if (!user) {
+    if (!lifeCoach) {
     const newLifeCoach = await LifeCoach.create({
       ...req.body,
       email,
@@ -47,7 +47,7 @@ async function signUpLifeCoach(req, res, next) {
   }
   } catch (err) {
     await req.transaction.rollback()
-    err.handler = 'createUser'
+    err.handler = 'createLifeCoach'
     next(err)
   }
 }
