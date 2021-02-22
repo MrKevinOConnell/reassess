@@ -39,8 +39,13 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       defaultValue: DataTypes.NOW,
     },
+    category: {
+   type: DataTypes.TEXT,
+   allowNull: false,
+    },
     clients: {
-        type: DataTypes.ARRAY(DataTypes.UUID),
+        type: DataTypes.ARRAY(DataTypes.JSON),
+        defaultValue: [],
     },
     age: DataTypes.INTEGER
   }, {tableName: 'LifeCoaches',

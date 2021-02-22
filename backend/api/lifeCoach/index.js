@@ -13,4 +13,5 @@ const {
 router.get('/session', decodeToken, populateUser, getSessionUser)
 router.post('/signup', signUpLifeCoach)
 router.post('/login', loginLifeCoach)
+router.get('/userConvo/:id', loginLifeCoach)
 module.exports = router

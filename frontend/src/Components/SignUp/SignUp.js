@@ -27,9 +27,10 @@ function SignUp() {
     firstName: '',
     lastName: '',
     age: 0,
+    category: 'Confidence',
   })
 
-   const {email,password,firstName,lastName,age} = fieldValues
+   const {email,password,firstName,lastName,age,category} = fieldValues
   const updateState = (e) => {
     setFieldValues({
       ...fieldValues,
@@ -43,7 +44,8 @@ function SignUp() {
         password: password,
         firstName: firstName,
         lastName: lastName,
-        age: age
+        age: age,
+        category: category
       } })
   }
 
@@ -130,9 +132,13 @@ function SignUp() {
               onChange={updateState}
               id='Login-emailInput'
             />
-            
-
-        
+            <div className='IntentAIContext-itemContainer'>
+            <label className='SignUp-newPasswordsLabel'>What category are you?</label>
+                  <select name='category' id='category' onChange={updateState} value={category}>
+                    <option value='Confidence' selected={category === 'Confidence'}>Confidence</option>
+                    <option value='Career' selected={category === 'Career'}>Career</option>
+                  </select>
+                  </div>
         </div>
       </div>
     </div>

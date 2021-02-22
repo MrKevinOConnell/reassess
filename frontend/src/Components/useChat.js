@@ -10,7 +10,7 @@ const useChat = (id) => {
     const [ globalState, dispatch ] = store()
   const {
     currentConvo,
-    currentUser,
+    currentLifeCoach,
     fetchingCurrentConvo,
   } = globalState
   const [messages, setMessages] = useState([]);
@@ -25,28 +25,27 @@ const useChat = (id) => {
     useEffect(() => {
       if(currentConvo.length) {
        for (var i = 0; i < currentConvo.length; i++) {
-  currentConvo[i].ownedByCurrentUser = currentConvo[i].user._id === currentUser.id;
+  currentConvo[i].ownedByCurrentUser = currentConvo[i].user._id === currentLifeCoach.id;
 };
   setMessages(currentConvo)
     }
     },[currentConvo]);
     
   useEffect(() => {
-    socketRef.current = socketIOClient(SOCKET_SERVER_URL, {
-      query: { id },
-    });
+    socketRef.current = socketIOClient(SOCKET_SERVER_URL);
+    socketRef.current.emit('join',id)
 
     socketRef.current.on(NEW_CHAT_MESSAGE_EVENT, (message) => {
       const incomingMessage = {
         ...message,
-        ownedByCurrentUser: message.user._id === currentUser.id,
+        ownedByCurrentUser: message.user._id === currentLifeCoach.id,
       };
       setMessages((messages) => [...messages, incomingMessage]);
       dispatch({ type: 'ADD_MESSAGE', payload: {message, id}} )
     });
 
     return () => {
-      socketRef.current.disconnect();
+      socketRef.current.emit('done',id);
     };
   }, [id]);
 
@@ -56,8 +55,8 @@ const useChat = (id) => {
       createdAt: new Date(),
       text: messageBody,
       user:{
-        _id: currentUser.id,
-      name: 'kevin'}
+        _id: currentLifeCoach.id,
+      name: currentLifeCoach.firstName}
     });
   };
 

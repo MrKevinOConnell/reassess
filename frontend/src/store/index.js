@@ -5,26 +5,27 @@ import PropTypes from 'prop-types'
 import reducerActions from './reducerActions'
 
 const initialState = {
-
+  //log in stuff
   loggedIn: false,
   loginError: null,
-  currentUser: {},
-
+  currentLifeCoach: {},
   //grabbing and updating convos
-  roomId: '100',
+  currentUserClicked: null,
   updatingRoomId: null,
   updatingRoomIdError: null,
+  roomId: 0,
   currentConvo: [],
   fetchingCurrentConvo: null,
   fetchingCurrentConvoError: null,
   updatingConvo: null,
   updatingConvoError: null,
-  currentEmail: '',
-  fetchingUser: null,
-  fetchingUserError: null,
-  creatingUser: null,
-  creatingUserError: null,
-  createdUser: null,
+  fetchingLifeCoach: null,
+  fetchingLifeCoachError: null,
+  creatingLifeCoach: null,
+  creatingLifeCoachError: null,
+  createdLifeCoach: null,
+  //tracking current user clicked
+  currentUser: {},
 }
 function reducer(state, { type, payload }) {
   const action = reducerActions.sync[type]

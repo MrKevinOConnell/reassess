@@ -18,6 +18,8 @@
     font-size: 24px;
 }
 
+li {list-style-type: none;}
+
 .text-input-field:focus {
     outline: none;
 }

@@ -36,8 +36,15 @@ module.exports = {
        age: {
         type: Sequelize.INTEGER,
       },
+       category: {
+        type: Sequelize.TEXT
+      },
        life_coach: {
         type: Sequelize.UUID,
+    },
+    chat_room: {
+        type: Sequelize.STRING,
+        allowNull: false,
     },
       is_deleted: {
         type: Sequelize.BOOLEAN,

@@ -35,3 +35,9 @@ node_modules/react-toastify/dist/components/Transitions.d.ts
 *.ts
 backend/yarn.lock
 *.lock
+frontend/.eslintcache
+backend/yarn.lock
+*.ts
+*.ts
+backend/yarn.lock
+*.lock

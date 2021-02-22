@@ -6,21 +6,21 @@ import useChat from "../useChat";
 const ChatRoom = (props) => {
     const [ globalState, dispatch ] = store()
   const {
-    currentUser,
+    currentLifeCoach,
     roomId
   } = globalState
     
-  const [id, setId] = useState('100');
+  const [id, setId] = useState('');
   const { messages, sendMessage } = useChat(id);
   const [newMessage, setNewMessage] = React.useState("");
 
   const handleNewMessageChange = (event) => {
-    
     setNewMessage(event.target.value);
   };
 
   useEffect(() => {
     setId(roomId)
+    console.log(roomId)
   }, [roomId])
 
   const handleSendMessage = () => {
@@ -29,7 +29,7 @@ const ChatRoom = (props) => {
   };
   return (
     <div className="chat-room-container">
-      <h1 className="room-name">{currentUser.firstName}</h1>
+      <h1 className="room-name">{currentLifeCoach.firstName}</h1>
       <div className="messages-container">
         <ol className="messages-list">
           {

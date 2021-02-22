@@ -3,7 +3,8 @@
 const uuid = require('uuid')
 const { sequelize, User, LifeCoach} = require('../../models')
 const { signToken } = require('../../middleware')
-
+const Sequelize = require('sequelize');
+const { first } = require('lodash');
 module.exports = {
   getSessionUser,
   loginUser,
@@ -28,18 +29,33 @@ async function getSessionUser(req, res, next) {
 async function signUpUser(req, res, next) {
   try {
     req.transaction = await sequelize.transaction()
-    const { email, password } = req.body
+    const { email, password, category,firstName} = req.body
+    console.log(category)
     const user = await User.findOne({ where: { email: req.body.email } })
     const id = uuid.v4()
     if (!user) {
-      
+    const lifeCoaches = await LifeCoach.findAll({ where: {category: category}, order: Sequelize.literal('random()'), limit: 1 })
+    const categoryLifeCoach = lifeCoaches[0];
+  
+      console.log("coach id",categoryLifeCoach.id)
+      console.log("coach clients",categoryLifeCoach.clients)
+       if(!categoryLifeCoach) {
+         throw Error("No life coach in this category.")
+       }
+    const chatId = [id, categoryLifeCoach.id].sort().join(',');
     const newUser = await User.create({
       ...req.body,
       email,
       password,
       id,
-      firstVersionId: id,
+      category,
+      lifeCoach: categoryLifeCoach.id,
+      chatRoom: chatId,
     })
+
+  const clients = categoryLifeCoach.clients
+    clients.push({firstName,id,chatId})
+    await categoryLifeCoach.update({clients: clients})
     await req.transaction.commit()
     res.json(newUser)
   }

@@ -53,6 +53,13 @@ module.exports = (sequelize, DataTypes) => {
     },
     yearlyGoals: {
       type: DataTypes.ARRAY(DataTypes.TEXT),
+    },
+    chatRoom: {
+      type: DataTypes.STRING,
+    },
+    category: {
+   type: DataTypes.TEXT,
+   allowNull: false,
     }
   }, {tableName: 'Users',
     underscored: true,

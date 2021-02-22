@@ -8,6 +8,7 @@ module.exports = {
   getSessionUser,
   loginLifeCoach,
   signUpLifeCoach,
+  getUserConvo,
 }
 
 async function getSessionUser(req, res, next) {
@@ -27,15 +28,17 @@ async function getSessionUser(req, res, next) {
 async function signUpLifeCoach(req, res, next) {
   try {
     req.transaction = await sequelize.transaction()
-    const { email, password } = req.body
+    const { email, password,category } = req.body
     const lifeCoach = await LifeCoach.findOne({ where: { email: req.body.email } })
     const id = uuid.v4()
     if (!lifeCoach) {
     const newLifeCoach = await LifeCoach.create({
       ...req.body,
       email,
+      category,
       password,
       id,
+      clients: [],
       firstVersionId: id,
     })
     await req.transaction.commit()
@@ -63,11 +66,29 @@ async function loginLifeCoach(req, res, next) {
     } else {
       await req.transaction.commit()
       res.cookie('access_token', await signToken(lifeCoach.id))
-      res.json({ id: lifeCoach.id, email: lifeCoach.email, firstName: lifeCoach.firstName })
+      res.json({ id: lifeCoach.id, clients: lifeCoach.clients,email: lifeCoach.email, firstName: lifeCoach.firstName })
     }
   } catch (err) {
     await req.transaction.rollback()
     err.handler = 'login'
+    next(err)
+  }
+}
+
+async function getUserConvo(req, res, next) {
+  try {
+     req.transaction = await sequelize.transaction()
+    const user = await User.findOne({ where: { id: req.body.id } })
+    if (!user) {
+      throw new Error('no account with this id');
+    } else {
+      const convoId = user.chatRoom
+      await req.transaction.commit()
+      res.json(convoId)
+    }
+  } catch (err) {
+    await req.transaction.rollback()
+    err.handler = 'getUserConvo'
     next(err)
   }
 }

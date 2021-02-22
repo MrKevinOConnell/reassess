@@ -4,7 +4,7 @@ module.exports = {
     await queryInterface.createTable('ChatRooms', {
       id: {
         allowNull: false,
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
       messages: {
         type: Sequelize.ARRAY(Sequelize.JSON)

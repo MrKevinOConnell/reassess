@@ -15,6 +15,9 @@ module.exports = {
       bio: {
         type: Sequelize.TEXT,
       },
+      category: {
+        type: Sequelize.TEXT
+      },
       email: {
         type: Sequelize.TEXT,
       },
@@ -25,7 +28,7 @@ module.exports = {
         type: Sequelize.INTEGER,
       },
        clients: {
-        type: Sequelize.ARRAY(Sequelize.UUID),
+        type: Sequelize.ARRAY(Sequelize.JSON),
     },
       is_deleted: {
         type: Sequelize.BOOLEAN,
