@@ -15,11 +15,14 @@ const Home = () => {
      console.log(currentLifeCoach.clients)
      if(currentLifeCoach){
     setClients(currentLifeCoach.clients)
+    dispatch({ type: 'CHANGE_ROOM_ID', payload:currentLifeCoach.clients[0].chatId})
      }
   }, [currentLifeCoach])
+
 console.log(currentLifeCoach)
-  function handleClick(id) {
-    dispatch({ type: 'CHANGE_ROOM_ID', payload:id})
+  function handleClick(client) {
+    dispatch({ type: 'CHANGE_ROOM_ID', payload:client.chatId})
+    dispatch({ type: 'CHANGE_USER', payload:client})
   }
 
 
@@ -33,7 +36,7 @@ console.log(currentLifeCoach)
               key={idx}
             >
                <PillButton
-        onClick={() => handleClick(client.chatId)}
+        onClick={() => handleClick(client)}
         name={client.firstName}
         extraClassName='login'
         id='Login-submit'

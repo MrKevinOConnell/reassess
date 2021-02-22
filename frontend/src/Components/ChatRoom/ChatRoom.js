@@ -7,6 +7,7 @@ const ChatRoom = (props) => {
     const [ globalState, dispatch ] = store()
   const {
     currentLifeCoach,
+    currentUser,
     roomId
   } = globalState
     
@@ -29,7 +30,7 @@ const ChatRoom = (props) => {
   };
   return (
     <div className="chat-room-container">
-      <h1 className="room-name">{currentLifeCoach.firstName}</h1>
+      <h1 className="room-name">{currentUser.firstName}</h1>
       <div className="messages-container">
         <ol className="messages-list">
           {

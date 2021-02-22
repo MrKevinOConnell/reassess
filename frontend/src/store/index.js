@@ -13,7 +13,7 @@ const initialState = {
   currentUserClicked: null,
   updatingRoomId: null,
   updatingRoomIdError: null,
-  roomId: 0,
+  roomId: '',
   currentConvo: [],
   fetchingCurrentConvo: null,
   fetchingCurrentConvoError: null,
@@ -26,6 +26,8 @@ const initialState = {
   createdLifeCoach: null,
   //tracking current user clicked
   currentUser: {},
+  changingUser: null, 
+  changingUserError: null
 }
 function reducer(state, { type, payload }) {
   const action = reducerActions.sync[type]

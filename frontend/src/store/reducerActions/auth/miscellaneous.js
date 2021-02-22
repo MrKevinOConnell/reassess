@@ -4,14 +4,14 @@ import _ from 'lodash'
 const loginAuthReducerActions = {
   // Synchronous actions
   sync: {
-    CHECK_USER__STARTED: (state) => (
-      { ...state, checkingUser: true }
+    CHANGE_USER__STARTED: (state) => (
+      { ...state, changingUser: true }
     ),
-    CHECK_USER__FAILED: (state, { payload }) => (
-      { ...state, checkingUser: false, loginError: payload }
+    CHANGE_USER__FAILED: (state, { payload }) => (
+      { ...state, changingUser: false, loginError: payload }
     ),
-    CHECK_USER__FINISHED: (state, { payload }) => (
-      { ...state, checkingUser: false, loginError: null, currentUser: { ...payload, checkedEmail: true } }
+    CHANGE_USER__FINISHED: (state, { payload }) => (
+      { ...state, changingUser: false, changingUserError: null, currentUser: { ...payload} }
     ),
     REFRESH_USER__STARTED: (state) => (
       { ...state, refreshingUser: true }
@@ -27,13 +27,13 @@ const loginAuthReducerActions = {
   // Each async action should have 3 related synchronous actions:
   // __STARTED, __FAILED, __FINISHED
   async: {
-    CHECK_USER: ({ dispatch }) => async ({ payload }) => {
+    CHANGE_USER: ({ dispatch }) => async ({ payload }) => {
       try {
-        dispatch({ type: 'CHECK_USER__STARTED' })
-        const res = await axios.get(`/api/auth/user?email=${ payload.email }`)
-        dispatch({ type: 'CHECK_USER__FINISHED', payload: res.data })
+        const user = payload
+        dispatch({ type: 'CHANGE_USER__STARTED' })
+        dispatch({ type: 'CHANGE_USER__FINISHED', payload: user })
       } catch (err) {
-        dispatch({ type: 'CHECK_USER__FAILED', payload: _.get(err, 'response.data') })
+        dispatch({ type: 'CHANGE_USER__FAILED', payload: _.get(err, 'response.data') })
       }
     },
     REFRESH_USER: ({ dispatch }) => async ({ payload }) => {

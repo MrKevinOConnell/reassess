@@ -11,6 +11,7 @@ const useChat = (id) => {
   const {
     currentConvo,
     currentLifeCoach,
+    currentUser,
     fetchingCurrentConvo,
   } = globalState
   const [messages, setMessages] = useState([]);
@@ -45,13 +46,14 @@ const useChat = (id) => {
     });
 
     return () => {
-      socketRef.current.emit('done',id);
+       socketRef.current.disconnect();
     };
   }, [id]);
 
   const sendMessage = (messageBody) => {
     socketRef.current.emit(NEW_CHAT_MESSAGE_EVENT, {
       _id: uuid.v4(),
+      roomId: id,
       createdAt: new Date(),
       text: messageBody,
       user:{
