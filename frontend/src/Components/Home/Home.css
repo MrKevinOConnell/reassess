@@ -1,15 +1,24 @@
 .home-container {
-    position: fixed;
-    left: 10%;
-    right: 10%;
-    top: 50%;
     display: flex;
     flex-direction: row;
+    
 }
 
 .home-buttons-container {
     display: flex;
     flex-direction: column;
+     position: fixed;
+    left: 5%;
+    right: 10%;
+    top: 45%;
+    width: 10%
+    
+}
+
+#page-wrap {
+  text-align: center;
+  /* Prevent sidebar from showing a scrollbar on page */
+  overflow: auto;
 }
 
 .text-input-field {
@@ -24,14 +33,3 @@ li {list-style-type: none;}
     outline: none;
 }
 
-.enter-room-button {
-    margin-top: 20px;
-    padding: 24px 12px;
-    font-size: 28px;
-    background: #31a24c;
-    color: white;
-    font-weight: 600;
-    text-align: center;
-    text-decoration: none;
-    border-radius: 7px;
-}

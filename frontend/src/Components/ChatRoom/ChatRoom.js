@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./ChatRoom.css";
 import { store } from '../../store'
 import useChat from "../useChat";
+import { DateTime } from "luxon";
 
 const ChatRoom = (props) => {
     const [ globalState, dispatch ] = store()
@@ -13,11 +14,15 @@ const ChatRoom = (props) => {
     
   const [id, setId] = useState('');
   const { messages, sendMessage } = useChat(id);
-  const [newMessage, setNewMessage] = React.useState("");
+  const [newMessage, setNewMessage] = useState('');
 
   const handleNewMessageChange = (event) => {
     setNewMessage(event.target.value);
   };
+
+ function timeConvert(time) {
+    return new Date(time).toLocaleDateString('en-US',{hour: 'numeric', minute: '2-digit' });
+  }
 
   useEffect(() => {
     setId(roomId)
@@ -41,8 +46,8 @@ const ChatRoom = (props) => {
                 message.ownedByCurrentUser ? "my-message" : "received-message"
               }`}
             >
-              {message.text}
-              
+              <p className = 'text'>{message.text}</p>
+              <p className='timestamp'>{timeConvert(message.createdAt)}</p>
             </li>
           ))
          }

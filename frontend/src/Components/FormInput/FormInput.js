@@ -16,8 +16,6 @@ function FormInput(props) {
     disabled,
   } = props
 
-  // TODO: Might need to change this back, but getting a react error if you switch from not having a valueProp
-  // to having one...
   const valueProp = value !== undefined ? { value } : { value: '' }
   const isGpt = gpt ? 'FormInput-gptInput' : 'FormInput-normalInput'
   return (

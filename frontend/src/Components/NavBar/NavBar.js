@@ -16,6 +16,7 @@ function NavBar({ location: { pathname } }) {
   if (!loggedIn) return null
 
   return (
+    
     <div className='NavBar-container'>
       <PillButton linkTo='/' name='Home' selected={pathname === '/'} />
       <PillButton onClick={logout} name='Logout' />

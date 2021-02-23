@@ -25,9 +25,6 @@ const App = () => (
       <Route path='/signup'>
         <SignUp/>
       </Route>
-      <PrivateRoute path='/100'>
-      <ChatRoom></ChatRoom>
-      </PrivateRoute>
        <PrivateRoute path='/'>
         <Home />
       </PrivateRoute>

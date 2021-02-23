@@ -41,3 +41,4 @@ backend/yarn.lock
 *.ts
 backend/yarn.lock
 *.lock
+*.lock
