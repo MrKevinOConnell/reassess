@@ -3,7 +3,7 @@ This repo is used mostly as a way to run the backend, but also to test features 
 
 ## Setup
 
-Assiming you have postgres installed, in your console, type `createdb reassess` to initalize the database
+Assuming you have postgres installed, in your console, type `createdb reassess` to initalize the database
 then type `yarn` to install dependencies.
 ## Commands
 Within `frontend`, use `yarn start` to have your browser open to http://localhost:3000/
