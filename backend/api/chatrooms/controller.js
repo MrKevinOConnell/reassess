@@ -15,16 +15,15 @@ async function updateChatRoom(req, res, next) {
   try {
     const opts = { transaction: req.transaction }
     const id = req.body.id
+    const message = req.body.incomingMessage
      const chatRoom = await ChatRoom.findOne({
       where: {
         id: id,
       },
     },opts);
     const messages = chatRoom.messages
-    messages.push(req.body.message)
+    messages.push(message)
       await chatRoom.update({messages: messages})
-      
-
       await req.transaction.commit()
       res.json(chatRoom.messages)
   } catch (err) {

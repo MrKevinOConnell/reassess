@@ -42,7 +42,7 @@ const useChat = (id) => {
         ownedByCurrentUser: message.user._id === currentLifeCoach.id,
       };
       setMessages((messages) => [...messages, incomingMessage]);
-  
+      dispatch({ type: 'ADD_MESSAGE', payload: {id,incomingMessage}})
     });
 
     return () => {
@@ -60,7 +60,6 @@ const useChat = (id) => {
         _id: currentLifeCoach.id,
       name: currentLifeCoach.firstName}
     });
-    dispatch({ type: 'ADD_MESSAGE', payload: {messageBody, id}} )
   };
 
   return { messages, sendMessage };
